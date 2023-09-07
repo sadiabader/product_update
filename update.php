@@ -3,8 +3,8 @@
 include('config.php');
 
 
-$user_id = $_GET['id'];
-$sqlquery = "select * from `product_details` where id = '$user_id'";
+$id = $_GET['Id'];
+$sqlquery = "select * from `products` where id = '$id'";
 $res = mysqli_query($connection, $sqlquery);
 if(!$res){
     die("query failed");
@@ -33,7 +33,7 @@ if(mysqli_num_rows($res) > 0){
 <label for="pname"> Name</label>
 <input type="text" name="pname" class="form-control">
 <label for="pdesc"> Description</label>
-<input type="text" name="pdesc" class="form-control">
+<input type="text" name="pdesc" class="form-control" >
 <label for="pcat"> Category</label>
 <input type="text" name="pcat" class="form-control">
 <label for="pimg"> Image</label>

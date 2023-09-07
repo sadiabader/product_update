@@ -2,15 +2,15 @@
 require('config.php');
 
 if(isset($_POST['submit'])){
-    $img_name = $_POST['Pname'];
-    $img_desc = $_POST['Pdesc'];
-    $img_cat = $_POST['Pcat'];
-    $img_img = $_FILES['Pimg']['name'];
-    $img_tmp = $_FILES['Pimg']['tmp_name'];
-    $img_size = $_FILES['Pimg']['size'];
+    $img_name = $_POST['pname'];
+    $img_desc = $_POST['pdesc'];
+    $img_cat = $_POST['pcat'];
+    $img_img = $_FILES['pimg']['name'];
+    $img_tmp = $_FILES['pimg']['tmp_name'];
+    $img_size = $_FILES['pimg']['size'];
 
-$insert = "INSERT INTO `products` (`name`, `discription`, `category`, `image`, `status`) 
-VALUES ('$img_name', '$img_disc', '$img_cat', '$img_img')";
+$insert = "INSERT INTO `products` (`name`, `discription`, `category`, `image`)
+ VALUES ('$img_name', '$img_desc', '$img_cat', '$img_img')";
 
 $query = mysqli_query($connection, $insert);
 // if($query){
@@ -24,7 +24,17 @@ move_uploaded_file($img_tmp , 'imgupload/' . $img_img);
 if(!$query){
     echo "query failed";
 }
+header('location:http://localhost/products/allproducts.php');
 }
+
+
+
+// update
+
+
+
+
+
 ?>
 
 
