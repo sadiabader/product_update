@@ -2,39 +2,24 @@
 require('config.php');
 
 if(isset($_POST['submit'])){
-    $img_name = $_POST['pname'];
-    $img_desc = $_POST['pdesc'];
-    $img_cat = $_POST['pcat'];
-    $img_img = $_FILES['pimg']['name'];
-    $img_tmp = $_FILES['pimg']['tmp_name'];
-    $img_size = $_FILES['pimg']['size'];
+   // print_r($_FILES);
+   $pname = $_POST['pname'];
+   $pdes = $_POST['des'];
+   $pcat = $_POST['des'];
+   $price = $_POST['price'];
+   $img_name = $_FILES['img']['name'];
+   $img_tmp = $_FILES['img']['tmp_name'];
+   $img_size = $_FILES['img']['size'];
 
-$insert = "INSERT INTO `products` (`name`, `discription`, `category`, `image`)
- VALUES ('$img_name', '$img_desc', '$img_cat', '$img_img')";
-
+$insert = "INSERT INTO `products` (`name`, `description`, `category`, `price`, `image`)
+VALUES ('$pname', '$pdes', ' $pcat', '$price', ' $img_name')";
 $query = mysqli_query($connection, $insert);
-// if($query){
-//     if(mysqli_num_rows($query) > 0){
-//         echo "<script> alert('record already exist'); </script>";
-//     }else{
-//         $insert = ""
-//     }
- 
-move_uploaded_file($img_tmp , 'imgupload/' . $img_img);
+move_uploaded_file($img_tmp , 'imgupload/' . $img_name);
 if(!$query){
     echo "query failed";
 }
-header('location:http://localhost/products/allproducts.php');
+
 }
-
-
-
-// update
-
-
-
-
-
 ?>
 
 
@@ -50,21 +35,32 @@ header('location:http://localhost/products/allproducts.php');
 <body>
    
 <div class="container">
+<h1><u> Add Product </u></h1>
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" class="form-group">
 
-    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" class="form-group" enctype="multipart/form-data">
+<input type="hidden" name="p_id" class="form-control">
 
-<label for="pname"> Name</label>
+<label for="name"> Name </label>
 <input type="text" name="pname" class="form-control">
-<label for="pdesc"> Description</label>
-<input type="text" name="pdesc" class="form-control">
-<label for="pcat"> Category</label>
-<input type="text" name="pcat" class="form-control">
-<label for="pimg"> Image</label>
-<input type="file" name="pimg" class="form-control">
-<input type="submit" name="submit">
+
+
+<label for="des"> Description </label>
+<input type="text" name="des" class="form-control">
+
+<label for="cat"> Category </label>
+<input type="text" name="cat" class="form-control">
+
+<label for="price"> Price </label>
+<input type="number" name="price" class="form-control">
+
+<label for="img"> Image </label>
+<input type="file" name="img" class="form-control">
+<br>
+<input type="submit" name="submit" value = "Add product" class="btn btn-primary">
+
+
 
 </form>
-
 </div>
 </body>
 </html>

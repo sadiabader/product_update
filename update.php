@@ -3,8 +3,9 @@
 include('config.php');
 
 
-$id = $_GET['Id'];
-$sqlquery = "select * from `products` where id = '$id'";
+$id = $_GET['id'];
+echo "$id";
+$sqlquery = "SELECT * from `products` where id = '$id'";
 $res = mysqli_query($connection, $sqlquery);
 if(!$res){
     die("query failed");
@@ -27,18 +28,28 @@ if(mysqli_num_rows($res) > 0){
 
 
 <div class="container">
+<h1>Update Details </h1>
+<form action="updatedata.php" class="form-group" method="post" enctype="multipart/form-data">
 
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" class="form-group" enctype="multipart/form-data">
+    <input type="hidden" name="id" class="form-control" value="<?php echo $row['id']?>" >
+<label for="name"> Name </label>
+<input type="text" name="pname" class="form-control" value="<?php echo $row['p_name']?>" >
+<br>
+<label for="cat"> Category </label>
+<input type="text" name="cat" class="form-control" value="<?php echo $row['p_category']?>" >
+<br>
+<label for="des"> Description </label>
+<input type="text" name="des" class="form-control" value="<?php echo $row['p_description']?>" >
+<br>
+<label for="price"> Price </label>
+<input type="number" name="price" class="form-control" value="<?php echo $row['p_price']?>" >
+<br>
+<label for="img"> Image </label>
+<input type="file" name="img" class="form-control" value="<?php echo $row['p_image']?>" >
+<br>
+<input type="submit" name="submit" value = "Add product" class="btn btn-primary">
 
-<label for="pname"> Name</label>
-<input type="text" name="pname" class="form-control">
-<label for="pdesc"> Description</label>
-<input type="text" name="pdesc" class="form-control" >
-<label for="pcat"> Category</label>
-<input type="text" name="pcat" class="form-control">
-<label for="pimg"> Image</label>
-<input type="file" name="pimg" class="form-control">
-<input type="submit" name="submit">
+
 
 </form>
 </div>
