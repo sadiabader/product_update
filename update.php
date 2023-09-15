@@ -3,15 +3,15 @@
 include('config.php');
 
 
-$id = $_GET['id'];
-echo "$id";
-$sqlquery = "SELECT * from `products` where id = '$id'";
-$res = mysqli_query($connection, $sqlquery);
-if(!$res){
+$user_id = $_GET['id'];
+//echo "$id";
+$sqlquery = "SELECT * from `products` where id = '$user_id'";
+$result_query = mysqli_query($connection, $sqlquery);
+if(!$result_query){
     die("query failed");
 }
-if(mysqli_num_rows($res) > 0){
-    while($row = mysqli_fetch_assoc($res)){
+if(mysqli_num_rows($result_query) > 0){
+    while($row = mysqli_fetch_assoc($result_query)){
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ if(mysqli_num_rows($res) > 0){
 <h1>Update Details </h1>
 <form action="updatedata.php" class="form-group" method="post" enctype="multipart/form-data">
 
-    <input type="hidden" name="id" class="form-control" value="<?php echo $row['id']?>" >
+    <input type="hidden" name="p_id" class="form-control" value="<?php echo $row['p_id']?>" >
 <label for="name"> Name </label>
 <input type="text" name="pname" class="form-control" value="<?php echo $row['p_name']?>" >
 <br>
